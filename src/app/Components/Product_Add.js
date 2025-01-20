@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CustomBreadcrumb from "./CustomBreadcrumb";
+import Image_preview from "./Image_preview";
+import ImageSelector from "./ImageSelector";
 
-const ProductDetails = () => {
+const ProductAdd = () => {
   const [productDetails, setProductDetails] = useState({
     productName: "",
     description: "",
@@ -17,6 +19,12 @@ const ProductDetails = () => {
     animationImage: null,
     galleryImages: null,
   });
+  const [preview, setPreview] = useState({
+    productImage: null,
+    animationImage: null,
+    galleryImages: null,
+  })
+
 
   const handleInputChange = (e) => {
     const { name, value, type, files } = e.target;
@@ -24,7 +32,20 @@ const ProductDetails = () => {
       ...prevState,
       [name]: type === "file" ? files[0] : value,
     }));
+    if (type == "file" && files[0]) {
+      const imgUrl = URL.createObjectURL(files[0])
+      setPreview((prev) => ({ ...prev, [name]: imgUrl }))
+    }
+
+
   };
+  //Memory CleanUp
+  useEffect(() => {
+    return () => {
+      Object.values(preview).forEach((url) => URL.revokeObjectURL(url));
+    };
+  }, [preview]);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,7 +55,7 @@ const ProductDetails = () => {
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
-      <CustomBreadcrumb prevpage="Product" currenPage="Add Product"/>
+      <CustomBreadcrumb prevpage="Product" currenPage="Add Product" />
       <h1 className="text-2xl font-bold mb-4">Add Product Details</h1>
 
       <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md">
@@ -75,36 +96,10 @@ const ProductDetails = () => {
           />
         </div>
 
-        <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">Product Image</label>
-          <input
-            type="file"
-            name="productImage"
-            onChange={handleInputChange}
-            className="w-full border border-gray-300 rounded px-4 py-2"
-          />
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">Image Animation</label>
-          <input
-            type="file"
-            name="animationImage"
-            onChange={handleInputChange}
-            className="w-full border border-gray-300 rounded px-4 py-2"
-          />
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">Product Gallery</label>
-          <input
-            type="file"
-            name="galleryImages"
-            multiple
-            onChange={handleInputChange}
-            className="w-full border border-gray-300 rounded px-4 py-2"
-          />
-        </div>
+               <ImageSelector label="Product Image" id="productImage" handleFunction={handleInputChange} preview={preview.productImage}/>
+               <ImageSelector label="Animation Image" id="animationImage" handleFunction={handleInputChange} preview={preview.animationImage}/>
+               <ImageSelector label="Gallary Image" id="galleryImages" handleFunction={handleInputChange} preview={preview.galleryImages}/>
+     
 
         <div className="grid grid-cols-2 gap-4">
           <div className="mb-4">
@@ -235,4 +230,4 @@ const ProductDetails = () => {
   );
 };
 
-export default ProductDetails;
+export default ProductAdd;

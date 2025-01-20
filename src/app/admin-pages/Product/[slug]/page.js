@@ -1,6 +1,6 @@
 'use client'
 
-import ProductDetails from '@/app/Components/Product_Add'
+import ProductAdd from '@/app/Components/Product_Add'
 import ManageProducts from '@/app/Components/Product_Manage'
 import { useParams } from 'next/navigation'
 import React from 'react'
@@ -12,7 +12,7 @@ export default function page() {
 
 
   const Mount = {
-    'add-product': <ProductDetails />,
+    'add-product': <ProductAdd />,
     'manage-products': <ManageProducts />
   }
   return (

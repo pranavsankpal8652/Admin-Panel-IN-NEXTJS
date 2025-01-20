@@ -7,8 +7,9 @@ import { Line, Bar } from 'react-chartjs-2';
 ChartJS.register(CategoryScale, LinearScale, BarElement, LineElement, PointElement, Title, Tooltip, Legend);
 
 import { FaShoppingCart, FaUser, FaChartLine } from "react-icons/fa";
-import { Breadcrumbs, Link, Typography } from '@mui/material'
+import { Breadcrumbs, Typography } from '@mui/material'
 import Head from 'next/head';
+import Link from 'next/link';
 // Sample chart data
 const lineData = {
   labels: ['January', 'February', 'March', 'April', 'May'],
@@ -52,26 +53,24 @@ const barData = {
 const Dashboard = () => {
   return (
     <>
-    <Head>
-      <title>Admin Panel || Frank and Oak</title>
-    </Head>
+    
     <div className="p-6">
       <h1 className="text-3xl font-bold mb-6 mt-4">Dashboard</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-        <div className="p-4 bg-white shadow rounded-lg flex items-center justify-between cursor-pointer">
+        <Link href="/admin-pages/orders/orders" className="p-4 bg-white shadow rounded-lg flex items-center justify-between cursor-pointer">
           <div>
             <div className="text-lg font-semibold">Orders</div>
             <div className="text-3xl font-bold">120</div>
           </div>
           <FaShoppingCart className="w-10 h-10 text-gray-400" />
-        </div>
-        <div className="p-4 bg-white shadow rounded-lg flex items-center justify-between cursor-pointer">
+        </Link>
+        <Link href="/admin-pages/Users" className="p-4 bg-white shadow rounded-lg flex items-center justify-between cursor-pointer">
           <div>
             <div className="text-lg font-semibold">Users</div>
             <div className="text-3xl font-bold">320</div>
           </div>
           <FaUser className="w-10 h-10 text-gray-400" />
-        </div>
+        </Link>
         <div className="p-4 bg-white shadow rounded-lg flex items-center justify-between cursor-pointer">
           <div>
             <div className="text-lg font-semibold">Revenue</div>

@@ -104,7 +104,7 @@ const ManageStories = () => {
                 </thead>
                 <tbody>
                     {stories.map((story, index) => (
-                        <tr key={story.id} className="border-b">
+                        <tr key={story.id} className="border-b text-center">
                             <td className="p-2">
                                 <input
                                     type="checkbox"
@@ -114,18 +114,18 @@ const ManageStories = () => {
                             </td>
                             <td className="p-2">{index + 1}</td>
                             <td className="p-2">{story.storyName}</td>
-                            <td className="p-2">
+                            <td className="p-2 w-20 mx-auto">
                                 <img
                                     src={story.image} // Online image URL
                                     alt={story.storyName}
-                                    className="w-16 h-16 object-cover"
+                                    className="w-16 h-16 "
                                 />
                             </td>
-                            <td className="p-2">
+                            <td className="p-2 w-32 mx-auto">
                                 <img
                                     src={story.bannerImage} // Online banner image URL
                                     alt={story.storyName}
-                                    className="w-32 h-16 object-cover"
+                                    className="w-32 h-16 "
                                 />
                             </td>
                             <td className="p-2">{story.description}</td>

@@ -1,11 +1,12 @@
 import { useState } from "react";
 import CustomBreadcrumb from "./CustomBreadcrumb"; 
+import Image_preview from "./Image_preview";
+import ImageSelector from "./ImageSelector";
 
 export default function AddCategory({pageFor}) {
   const [catName, setCatName] = useState("");
   const [catDesc, setCatDesc] = useState("");
-  const [catImg, setCatImg] = useState("");
-
+   const [preview,setPreview]=useState(null)
 
   const handleAddColor = (e) => {
     e.preventDefault();
@@ -20,6 +21,15 @@ export default function AddCategory({pageFor}) {
     // setColorName("");
     // setColorCode("#ffffff");
   };
+  const handleImageChange=(e)=>{
+    const imgFile=e.target.files[0]
+    if(imgFile){
+      setPreview(URL.createObjectURL(imgFile))
+    }
+    else{
+      setPreview(null)
+    }
+  }
 
   return (
     <main className="p-6 bg-gray-100 min-h-screen">
@@ -67,21 +77,8 @@ export default function AddCategory({pageFor}) {
               placeholder="Enter Size Description"
             />
           </div>
-          <div className="mb-4 py-6">
-            <label htmlFor="CateImg" className="block text-sm font-medium text-gray-700 mb-1">
-              Category Image
-            </label>
-            <input
-              type="file"
-              id="CateImg"
-              value={catImg}
-              accept="image/jpeg"
-              onChange={(e) => setCatImg(e.target.value)}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring focus:ring-indigo-200 focus:outline-none"
-              placeholder="Enter Size name"
-            />
-          </div>
 
+          <ImageSelector label="Category Image" id="catImg" handleFunction={handleImageChange} preview={preview}/>
        
 
           <div>
@@ -96,7 +93,7 @@ export default function AddCategory({pageFor}) {
           {/* Submit Button */}
           <button
             type="submit"
-            className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition my-10">
+            className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition mt-10">
             Add Color
           </button>
         </form>

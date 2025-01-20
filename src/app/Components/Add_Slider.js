@@ -1,22 +1,25 @@
 import React, { useState } from "react";
 import CustomBreadcrumb from "./CustomBreadcrumb";
+import Image_preview from "./Image_preview";
 
 const AddSlider = () => {
   const [formData, setFormData] = useState({
     sliderName: "",
     heading: "",
     subHeading: "",
-    sliderImage: null,
+    sliderImages: [],
     status: "Active",
   });
-
+ 
+  const [preview,setPreview]=useState([])
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
   const handleFileChange = (e) => {
-    setFormData({ ...formData, sliderImage: e.target.files[0] });
+    setFormData({ ...formData, sliderImages:[...e.target.files] });
+    setPreview([...e.target.files])
   };
 
   const handleSubmit = (e) => {
@@ -78,13 +81,17 @@ const AddSlider = () => {
         {/* Slider Images */}
         <div>
           <label className="block text-sm font-medium mb-1">Slider Images</label>
+          <div className="flex gap-[50px] items-center">
           <input
             type="file"
             name="sliderImage"
             accept="image/*"
+            multiple
             onChange={handleFileChange}
-            className="w-full"
+            className="w-[60%]"
           />
+          <Image_preview preview={preview}/>
+          </div>
         </div>
 
         {/* Status */}

@@ -104,7 +104,7 @@ const ManageProducts = () => {
         </thead>
         <tbody>
           {products.map((product, index) => (
-            <tr key={product.id} className="border-b">
+            <tr key={product.id} className="border-b text-center">
               <td className="p-2">
                 <input
                   type="checkbox"
