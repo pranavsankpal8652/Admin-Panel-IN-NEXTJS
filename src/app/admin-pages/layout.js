@@ -3,6 +3,8 @@ import "../../app/globals.css"
 import SideBar from "../Components/SideBar";
 import Footer from "../Components/Footer";
 import Head from "next/head";
+import { ToastContainer } from "react-toastify";
+import Header from "../Components/Header";
 
 
 
@@ -15,14 +17,12 @@ export default function RootLayout({ children }) {
           </aside>
 
           <main className="flex-1 bg-gray-100 overflow-y-auto">
+          <ToastContainer />
+          <Header/>
             {children}
-            <Footer/>
+            <Footer />
           </main>
         </div>
-  </>
-       
-
-
-     
+  </> 
   );
 }

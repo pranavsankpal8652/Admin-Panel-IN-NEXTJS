@@ -1,11 +1,15 @@
 import { useState } from "react";
 import CustomBreadcrumb from "./CustomBreadcrumb";
 import ImageSelector from "./ImageSelector";
+import StatusComp from "./StatusComp";
 
 const AddStory = () => {
-  const [storyName, setStoryName] = useState("");
-  const [description, setDescription] = useState("");
-  const [status, setStatus] = useState("Active");
+  const [formData, setFormData] = useState({
+    storyName: "",
+    description: "",
+    status: "Active",
+  });
+
   const [preview, setPreview] = useState({
     Img: null,
     bannerImg: null,
@@ -17,6 +21,11 @@ const AddStory = () => {
       setPreview(prev=>({...prev,[name]:URL.createObjectURL(files[0])}))
 
     }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = (e) => {
@@ -36,15 +45,15 @@ const AddStory = () => {
           <input
             type="text"
             id="storyName"
-            value={storyName}
-            onChange={(e) => setStoryName(e.target.value)}
+            value={formData.storyName}
+            onChange={handleInputChange}
             placeholder="Story Name"
             className="border p-2 rounded"
             required
           />
         </div>
 
-        <ImageSelector label=" Image" id="Img" handleFunction={handleImageChange} preview={preview.Img}/>
+        <ImageSelector label="Image" id="Img" handleFunction={handleImageChange} preview={preview.Img}/>
         <ImageSelector label="Banner Image" id="bannerImg" handleFunction={handleImageChange} preview={preview.bannerImg}/>
 
 
@@ -52,25 +61,15 @@ const AddStory = () => {
           <label htmlFor="description" className="font-semibold">Description</label>
           <textarea
             id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            value={formData.description}
+            onChange={handleInputChange}
             placeholder="Description..."
             className="border p-2 rounded"
             required
           />
         </div>
 
-        <div className="flex items-center space-x-4">
-          <label className="font-semibold">Status</label>
-          <select
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-            className="border p-2 rounded"
-          >
-            <option value="Active">Active</option>
-            <option value="Deactive">Deactive</option>
-          </select>
-        </div>
+       <StatusComp handleInputChange={handleInputChange}/>
 
         <div>
           <button

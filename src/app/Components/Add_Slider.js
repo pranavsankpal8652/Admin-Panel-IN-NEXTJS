@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import CustomBreadcrumb from "./CustomBreadcrumb";
 import Image_preview from "./Image_preview";
+import StatusComp from "./StatusComp";
+import ImageSelector from "./ImageSelector";
 
 const AddSlider = () => {
   const [formData, setFormData] = useState({
@@ -13,7 +15,7 @@ const AddSlider = () => {
  
   const [preview,setPreview]=useState([])
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     setFormData({ ...formData, [name]: value });
   };
 
@@ -84,7 +86,7 @@ const AddSlider = () => {
           <div className="flex gap-[50px] items-center">
           <input
             type="file"
-            name="sliderImage"
+            name="sliderImages"
             accept="image/*"
             multiple
             onChange={handleFileChange}
@@ -95,33 +97,7 @@ const AddSlider = () => {
         </div>
 
         {/* Status */}
-        <div>
-          <label className="block text-sm font-medium mb-1">Status</label>
-          <div className="flex items-center space-x-4">
-            <label className="flex items-center space-x-2">
-              <input
-                type="radio"
-                name="status"
-                value="Active"
-                checked={formData.status === "Active"}
-                onChange={handleInputChange}
-                className="w-4 h-4"
-              />
-              <span>Active</span>
-            </label>
-            <label className="flex items-center space-x-2">
-              <input
-                type="radio"
-                name="status"
-                value="Deactive"
-                checked={formData.status === "Deactive"}
-                onChange={handleInputChange}
-                className="w-4 h-4"
-              />
-              <span>Deactive</span>
-            </label>
-          </div>
-        </div>
+      <StatusComp handleInputChange={handleInputChange}/>
 
         {/* Submit Button */}
         <div>

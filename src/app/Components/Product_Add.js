@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import CustomBreadcrumb from "./CustomBreadcrumb";
 import Image_preview from "./Image_preview";
 import ImageSelector from "./ImageSelector";
+import StatusComp from "./StatusComp";
 
 const ProductAdd = () => {
   const [productDetails, setProductDetails] = useState({
@@ -191,33 +192,7 @@ const ProductAdd = () => {
           </div>
         </div>
 
-        <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">Status</label>
-          <div className="flex items-center gap-4">
-            <label className="flex items-center">
-              <input
-                type="radio"
-                name="status"
-                value="Active"
-                checked={productDetails.status === "Active"}
-                onChange={handleInputChange}
-                className="mr-2"
-              />
-              Active
-            </label>
-            <label className="flex items-center">
-              <input
-                type="radio"
-                name="status"
-                value="Deactive"
-                checked={productDetails.status === "Deactive"}
-                onChange={handleInputChange}
-                className="mr-2"
-              />
-              Deactive
-            </label>
-          </div>
-        </div>
+       <StatusComp  handleInputChange={handleInputChange}/>
 
         <button
           type="submit"

@@ -34,41 +34,9 @@ const ProfilePage = () => {
 
     return (
         <div className="flex flex-col min-h-screen bg-gray-50">
-            <header className="  p-4 flex justify-between items-center shadow-md">
+            <header className="p-4 grid grid-cols-3 items-center shadow-md">
                 <CustomBreadcrumb currenPage="Profile" />
-                <div className="text-2xl font-bold">Profile</div>
-                <div className="flex items-center space-x-6">
-                    <div className="relative">
-                        <button onClick={() => setShowNotifications(!showNotifications)}>
-                            <FiBell className="h-6 w-6" />
-                        </button>
-                        {showNotifications && (
-                            <div className="absolute right-0 mt-2 w-64 bg-white border border-gray-200 shadow-lg rounded-lg p-4">
-                                <p className="text-gray-700 mb-2">New order received!</p>
-                                <p className="text-gray-700 mb-2">Low stock alert!</p>
-                                <p className="text-gray-700">Customer message received!</p>
-                            </div>
-                        )}
-                    </div>
-                    <div className="flex items-center space-x-4">
-                        <Avatar src="/2.jpg" type='icon' />
-                        <div className="relative">
-                            <button>
-                                <FiUser className="h-6 w-6" />
-                            </button>
-                            <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 shadow-lg rounded-lg p-4 hidden">
-                                <p className="flex items-center space-x-2">
-                                    <FiSettings className="h-5 w-5" />
-                                    <span>Settings</span>
-                                </p>
-                                <p className="flex items-center space-x-2 mt-2">
-                                    <FiLogOut className="h-5 w-5" />
-                                    <span>Logout</span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div className="text-2xl font-bold text-center">Profile</div>
             </header>
 
             <div className="flex">

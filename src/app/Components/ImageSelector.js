@@ -5,7 +5,7 @@ export default function ImageSelector({label,id,handleFunction,preview}) {
     return (
         <>
             <div className="mb-4 py-6 ">
-                <label htmlFor="CateImg" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor={id} className="block text-sm font-medium text-gray-700 mb-1">
                    {label}
                 </label>
                 <div className="flex gap-[50px] items-center">

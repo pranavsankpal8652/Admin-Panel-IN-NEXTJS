@@ -1,24 +1,22 @@
 import { useState } from "react";
 import CustomBreadcrumb from "./CustomBreadcrumb";
+import StatusComp from "./StatusComp";
 
 export default function AddSize() {
-  const [colors, setColors] = useState([]);
-  const [colorName, setColorName] = useState("");
-  const [colorCode, setColorCode] = useState("#ffffff");
+  const [formData, setFormData] = useState({
+    sizeName: "",
+    status: "Active",
+  });
 
-  const handleAddColor = (e) => {
+  const handleAddSize = (e) => {
     e.preventDefault();
 
-    if (colorName.trim() === "") {
-      alert("Please enter a color name.");
-      return;
-    }
-
-    const newColor = { name: colorName, code: colorCode };
-    setColors([...colors, newColor]);
-    setColorName("");
-    setColorCode("#ffffff");
+   
   };
+  const handleInputChange=(e)=>{
+    const {name,value}=e.target
+    setFormData({...formData,[name]:value})
+  }
 
   return (
     <main className="p-6 bg-gray-100 min-h-screen">
@@ -31,7 +29,7 @@ export default function AddSize() {
       {/* Add Color Form */}
       <div className="bg-white p-6 rounded-lg shadow-md mb-6">
         <h2 className="text-lg font-semibold text-gray-800 mb-4 py-6">Add New Size</h2>
-        <form onSubmit={handleAddColor}>
+        <form onSubmit={handleAddSize}>
           {/* Color Name */}
           <div className="mb-4 py-6">
             <label htmlFor="colorName" className="block text-sm font-medium text-gray-700 mb-1">
@@ -39,9 +37,10 @@ export default function AddSize() {
             </label>
             <input
               type="text"
-              id="colorName"
-              value={colorName}
-              onChange={(e) => setColorName(e.target.value)}
+              id="sizeName"
+              name="sizeName"
+              value={formData.sizeName}
+              onChange={handleInputChange}
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring focus:ring-indigo-200 focus:outline-none"
               placeholder="Enter Size name"
             />
@@ -49,14 +48,7 @@ export default function AddSize() {
 
        
 
-          <div>
-            <label htmlFor="status" className="px-4">Satus:</label>
-            <label htmlFor="Active" className="px-1">Active</label>
-            <input type="radio" name="status" id="Active"  className="me-6"></input>
-            <label htmlFor="InActive" className="px-1">InActive</label>
-            <input type="radio" name="status" id="InActive"></input>
-
-          </div>
+         <StatusComp handleInputChange={handleInputChange}/>
 
           {/* Submit Button */}
           <button

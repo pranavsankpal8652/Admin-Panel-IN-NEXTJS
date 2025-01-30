@@ -1,10 +1,14 @@
 import { useState } from "react";
 import CustomBreadcrumb from "./CustomBreadcrumb";
+import StatusComp from "./StatusComp";
 
 export default function AddColorPage() {
-  const [colors, setColors] = useState([]);
-  const [colorName, setColorName] = useState("");
-  const [colorCode, setColorCode] = useState("#ffffff");
+  const [formData, setFormData] = useState({
+    colorName: '',
+    colorCode: '',
+    status: "Active",
+  });
+
 
   const handleAddColor = (e) => {
     e.preventDefault();
@@ -14,16 +18,19 @@ export default function AddColorPage() {
       return;
     }
 
-    const newColor = { name: colorName, code: colorCode };
-    setColors([...colors, newColor]);
-    setColorName("");
-    setColorCode("#ffffff");
+
   };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
 
   return (
     <main className="p-6 bg-gray-100 min-h-screen">
       {/* Page Title */}
-      <CustomBreadcrumb prevpage="Color" currenPage="Add Colour"/>
+      <CustomBreadcrumb prevpage="Color" currenPage="Add Colour" />
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-gray-700">Add Colors</h1>
       </div>
@@ -40,8 +47,9 @@ export default function AddColorPage() {
             <input
               type="text"
               id="colorName"
-              value={colorName}
-              onChange={(e) => setColorName(e.target.value)}
+              name='colorName'
+              value={formData.colorName}
+              onChange={handleInputChange}
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring focus:ring-indigo-200 focus:outline-none"
               placeholder="Enter color name"
             />
@@ -55,20 +63,14 @@ export default function AddColorPage() {
             <input
               type="color"
               id="colorCode"
-              value={colorCode}
-              onChange={(e) => setColorCode(e.target.value)}
+              name='colorCode'
+              value={formData.colorCode}
+              onChange={handleInputChange}
               className="w-full h-10 border border-gray-300 rounded-lg"
             />
           </div>
 
-          <div>
-            <label htmlFor="status" className="px-4">Satus:</label>
-            <label htmlFor="Active" className="px-1">Active</label>
-            <input type="radio" name="status" id="Active"  className="me-6"></input>
-            <label htmlFor="InActive" className="px-1">InActive</label>
-            <input type="radio" name="status" id="InActive"></input>
-
-          </div>
+          <StatusComp handleInputChange={handleInputChange} />
 
           {/* Submit Button */}
           <button
@@ -79,7 +81,7 @@ export default function AddColorPage() {
         </form>
       </div>
 
-  
+
     </main>
   );
 }
